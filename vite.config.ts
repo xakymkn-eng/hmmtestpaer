@@ -10,6 +10,7 @@ const rootDir = typeof import.meta.dirname !== 'undefined'
 
 export default defineConfig(() => {
   return {
+    base: '/hmmtestpaer/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
