@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #050b14;
+    color: #e2e8f0;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: 'Rajdhani', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* Prevent mobile scroll bouncing & pinch zoom during game play */
+  html, body, #root {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    max-width: 100vw;
+    max-height: 100dvh;
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    touch-action: none;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: auto;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+.font-orbitron {
+  font-family: 'Chakra Petch', 'Orbitron', monospace, sans-serif;
+}
+
+.font-rajdhani {
+  font-family: 'Chakra Petch', 'Rajdhani', -apple-system, sans-serif;
+}
+
+/* Combo Milestone Subtle Shake Animation (transform-only, GPU accelerated, ±2px & ±1.2deg micro-rotation) */
+@keyframes combo-milestone-shake {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0) rotate(0deg);
+  }
+  15% {
+    transform: scale(1.15) translate3d(-3px, -1px, 0) rotate(-1.5deg);
+  }
+  30% {
+    transform: scale(1.2) translate3d(3px, 1px, 0) rotate(1.5deg);
+  }
+  45% {
+    transform: scale(1.14) translate3d(-2px, 1px, 0) rotate(-1deg);
+  }
+  60% {
+    transform: scale(1.09) translate3d(2px, -0.5px, 0) rotate(0.8deg);
+  }
+  75% {
+    transform: scale(1.04) translate3d(-1px, 0, 0) rotate(-0.4deg);
+  }
+  90% {
+    transform: scale(1.02) translate3d(0.5px, 0, 0) rotate(0deg);
+  }
+  100% {
+    transform: scale(1) translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+/* Combo Multiplier Radiant Pulse Animation */
+@keyframes combo-multiplier-pulse {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(251, 191, 36, 0.5);
+    filter: drop-shadow(0 0 2px rgba(251, 191, 36, 0.5));
+    transform: scale(1);
+  }
+  50% {
+    text-shadow: 0 0 16px rgba(251, 191, 36, 1), 0 0 24px rgba(245, 158, 11, 0.9);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9)) brightness(1.35);
+    transform: scale(1.15);
+  }
+}
+
+.animate-combo-milestone-shake {
+  animation: combo-milestone-shake 0.65s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  will-change: transform;
+}
+
+.animate-combo-multiplier-pulse {
+  animation: combo-multiplier-pulse 0.65s ease-in-out infinite;
+  display: inline-block;
+  will-change: transform, filter;
+}
+
+/* Lobby Escort Wingman Drone Floating & Swaying Flight Animations */
+@keyframes drone-float-left {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-2.5deg) scale(0.92);
+  }
+  50% {
+    transform: translate3d(2px, -8px, 0) rotate(1.5deg) scale(0.92);
+  }
+}
+
+@keyframes drone-float-right {
+  0%, 100% {
+    transform: translate3d(0, -7px, 0) rotate(2deg) scale(0.92);
+  }
+  50% {
+    transform: translate3d(-2px, 1px, 0) rotate(-2deg) scale(0.92);
+  }
+}
+
+.animate-drone-float-left {
+  animation: drone-float-left 3.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-drone-float-right {
+  animation: drone-float-right 3.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   ENHANCED COMBO BURST NOTIFICATION KEYFRAMES & UTILITIES
+   ========================================================================== */
+
+/* Dramatic 3D Zoom & Overshoot Slam Entrance */
+@keyframes combo-burst-slam {
+  0% {
+    opacity: 0;
+    transform: scale(0.35) translateY(-30px);
+    filter: blur(8px) brightness(2.4);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1.15) translateY(0);
+    filter: blur(0px) brightness(1.35);
+  }
+  60% {
+    transform: scale(0.96);
+  }
+  80% {
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+/* 360-degree Rotating Holographic Energy Rays */
+@keyframes combo-burst-rays-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.12);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+/* Fullscreen Edge Vignette Flash on Milestone Trigger (leaves gameplay clear) */
+@keyframes combo-screen-vignette-flash {
+  0% {
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.95;
+  }
+  45% {
+    opacity: 0.55;
+  }
+  75% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Radiant Multi-layer Energy Flare Glow */
+@keyframes combo-burst-glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 16px rgba(56, 189, 248, 0.7));
+  }
+  50% {
+    filter: drop-shadow(0 0 35px rgba(251, 191, 36, 0.95)) drop-shadow(0 0 55px rgba(244, 63, 94, 0.7));
+  }
+}
+
+/* Chromatic Shimmer Sheen Across Text */
+@keyframes combo-text-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Micro-spark particles floating upwards */
+@keyframes combo-particle-spark {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--tw-spark-x, 0px), -45px, 0) scale(0.2);
+    opacity: 0;
+  }
+}
+
+.animate-combo-burst-slam {
+  animation: combo-burst-slam 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  will-change: transform, opacity, filter;
+}
+
+.animate-combo-burst-rays {
+  animation: combo-burst-rays-spin 9s linear infinite;
+  will-change: transform;
+}
+
+.animate-combo-screen-vignette {
+  animation: combo-screen-vignette-flash 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity;
+}
+
+.animate-combo-burst-glow {
+  animation: combo-burst-glow-pulse 1.4s ease-in-out infinite;
+  will-change: filter;
+}
+
+.animate-combo-text-shimmer {
+  background-size: 200% auto;
+  animation: combo-text-shimmer 2.2s linear infinite;
+}
+
+.animate-combo-particle-spark {
+  animation: combo-particle-spark 1.2s ease-out forwards;
+}
+
+/* Subtle arcade CRT glass curve and ambient vignette for deep sci-fi immersion */
+.game-viewport-atmosphere {
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.75), inset 0 0 20px rgba(6, 182, 212, 0.15);
+}
+
