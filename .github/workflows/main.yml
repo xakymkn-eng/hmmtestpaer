@@ -7,7 +7,11 @@ on:
 
 jobs:
   build:
+<<<<<<< HEAD
     runs-on: ubuntu-24.04
+=======
+    runs-on: ubuntu-latest
+>>>>>>> eb85fdf582bfb7b9833a721145dcd6e43abe7916
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
